@@ -1,0 +1,296 @@
+.log_wrapper{
+	/* height: 200px;
+	overflow-y: scroll; */
+	width: 60%;
+	height: 70%;
+
+	margin:8% 20% 0% 20%;
+
+}
+
+.search_part {
+	width: 100%;
+	text-align: center;
+}
+
+
+.search_part input{
+	border: none;
+	background-color: #fff;
+	padding: 0.7%;
+	border-radius: 3px;
+	width: 10%;
+	color: gray;
+	font-weight: bold;
+}
+
+
+.search_btn{
+	border: none;
+	width: 5%;
+	height: 10%;
+	padding: 0.7% 0.7% 0.7%;
+	font-size: 90%;
+	border-radius: 3px;
+	background-color: #105d94;
+	color: #fff;
+}
+
+
+
+.table_style{
+	width: 80%;
+	margin: 0 10%;
+}
+
+.under_btns{
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.prev_btn{
+	border: none;
+	width: 10%;
+	height: 5%;
+	padding: 1% 1% 1%;
+	font-size: 100%;
+	border-radius: 3px;
+	background-color: #105d94;
+	color: #fff;
+	margin-right: 0.5%;
+}
+
+.next_btn{
+
+	border: none;
+	width: 10%;
+	height: 5%;
+	padding: 1% 1% 1%;
+	font-size: 100%;
+	border-radius: 3px;
+	background-color: #105d94;
+	color: #fff;
+}
+
+.other{
+	position: relative;
+	right: 0;
+	display: grid;
+	width: 25%;
+	margin-left: 65%;
+	margin-bottom: 1%;
+	height: 40px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+
+
+}
+.download_btn{
+	border-radius: 3px;
+	margin-left: 20%;
+	border: none;
+	width: 80%;
+	height: 100%;
+	cursor: pointer;
+	padding: 0.7% 0.7% 0.7%;
+	font-size: 90%;
+	background-color: #fff;
+}
+
+.delete_btn{
+	border-radius: 3px;
+	border: none;
+	margin-left: 20%;
+	width: 80%;
+	height: 100%;
+	cursor: pointer;
+	padding: 0.7% 0.5% 0.7%;
+	font-size: 90%;
+	background-color: #fff;
+}
+
+table{
+	width: 50%;
+	margin: 0 auto;
+	font-size: 130%;
+	text-align: center;
+	border-collapse: collapse;
+}
+table tr{
+	width: 50px;
+	height: 40px;
+	
+}
+table th{
+	width: 50px;
+	height: 50px;
+	background-color: #105d94;
+	color: #fff;
+}
+
+table td{
+	width: 50px;
+	height: 10px;
+	background-color: #fff;
+	font-size: 90%;
+}
+
+
+
+@media all and (max-width:767px) {
+	.log_wrapper{
+		/* height: 200px;
+		overflow-y: scroll; */
+		width: 90%;
+		height: 70%;
+	
+		margin:3% 5% 0% 5%;
+	
+	}
+	
+	.search_part {
+		width: 100%;
+		text-align: center;
+	}
+	
+	
+	.search_part input{
+		border: none;
+		background-color: #fff;
+		padding: 0.7%;
+		margin: 1%;
+		border-radius: 3px;
+		width: 30%;
+		color: gray;
+		font-weight: bold;
+	}
+	
+	
+	.search_btn{
+		position: relative;
+		top: 2px;
+		border: none;
+		width: 20%;
+		height: 10%;
+		padding: 0.8%;
+		font-size: 90%;
+		border-radius: 3px;
+		background-color: #105d94;
+		color: #fff;
+	}
+	
+	
+	
+	.table_style{
+		width: 90%;
+		margin: 0 5%;
+	}
+	
+	.under_btns{
+		width: 100%;
+		margin-top: 0px;
+		text-align: center;
+	}
+	
+	.prev_btn{
+		border: none;
+		width: 20%;
+		height: 5%;
+		padding: 1% 1% 1%;
+		font-size: 0.8em;
+		border-radius: 3px;
+		background-color: #105d94;
+		color: #fff;
+		margin-top: 3%;
+		margin-right: 0.5%;
+	}
+	
+	.next_btn{
+	
+		border: none;
+		width: 20%;
+		height: 5%;
+		padding: 1% 1% 1%;
+		font-size: 0.8em;
+		border-radius: 3px;
+		background-color: #105d94;
+		color: #fff;
+	}
+	
+	.other{
+		position: relative;
+		right: 0;
+		display: grid;
+		width: 50%;
+		margin-left: 45%;
+		margin-bottom: 2%;
+		height: 30px;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
+	
+	
+	}
+	.download_btn{
+		border-radius: 3px;
+		margin-left: 25%;
+		border: none;
+		width: 95%;
+		height: 100%;
+		cursor: pointer;
+		padding: 0.7% 0.7% 0.7%;
+		font-size: 0.7em;
+		background: none;
+		border: 1px solid #fff;
+	}
+	
+	.delete_btn{
+		border-radius: 3px;
+		border: none;
+		margin-left: 30%;
+		width: 70%;
+		height: 100%;
+		cursor: pointer;
+		padding: 0.7% 0.5% 0.7%;
+		font-size: 0.7em;
+		background: none;
+		border: 1px solid #fff;
+	}
+	
+	table{
+		width: 50%;
+		margin: 0 auto;
+		font-size: 130%;
+		text-align: center;
+		border-collapse: collapse;
+	}
+	table tr{
+		width: 50px;
+		height: 35px;
+		
+	}
+	table th{
+		width: 50px;
+		height: 35px;
+		font-size: 100%;
+		background-color: #105d94;
+		color: #fff;
+	}
+	
+	table td{
+		width: 50px;
+		height: 10px;
+		background-color: #fff;
+		font-size: 0.7em;
+		white-space: nowrap;
+	}
+
+	ul{
+		display: none;
+	}
+}
+
+
+
+
+

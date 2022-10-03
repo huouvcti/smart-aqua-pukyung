@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sensor Send page</title>
+</head>
+<body>
+    <h1>sensor send page</h1>
+    <%= parameters.user_key %>
+    <br>
+
+    <!-- PH, RTD, EC, DO -->
+    <input type="text" name="PH" placeholder="PH">
+    <input type="text" name="RTD" placeholder="RTD">
+    <input type="text" name="SALT" placeholder="SALT">
+    <input type="text" name="DO" placeholder="DO">
+    <button onClick="sensor_click()">전송</button>
+
+    
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let url = "<%= parameters.url %>";
+        const user_key = "<%= parameters.user_key %>";
+
+        const socket = io.connect(url, {
+            transports: ['websocket']
+        });
+        socket.emit('join', {room: user_key});
+
+        let sensor;
+        function sensor_click(){
+            sensor = {
+                PH: document.getElementsByName("PH")[0].value,
+                RTD: document.getElementsByName("RTD")[0].value,
+                SALT: document.getElementsByName("SALT")[0].value,
+                DO: document.getElementsByName("DO")[0].value
+            }
+            console.log(sensor);
+            socket.emit('sensor_send', sensor);
+        }      
+
+        socket.on('message', (data) => {
+            console.log(data);
+            document.getElementById('jo').innerText = data.wt;
+        });
+    </script>
+</body>
+</html>

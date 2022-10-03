@@ -1,0 +1,328 @@
+body{
+    background: #1e90ff;
+    width: 80%;
+    height: 86vh;
+    font-size: 1vw;
+    margin: 0px auto;
+}
+#title{
+    position: relative;
+    display: inline-block;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 270%;
+
+    color: #fff;
+    text-align: center;
+}
+
+img{
+    position: absolute;
+    display: inline-block; 
+    cursor: pointer;
+    transition: 10s;
+}
+
+img:active{
+    opacity: 0;
+}
+
+#halibut{
+    z-index: -1;
+    width: 30%;
+    top: 0;
+    left: 20px;
+    transform: rotate(10deg);
+}
+
+#seaweeds{
+    z-index: -1;
+    width: 15%;
+    bottom: 30px;
+    right: 60px;
+    transform: rotate(40deg);
+}
+
+#loginBtn{
+    position: absolute;
+    display: inline-block;
+    top: 100px;
+    width: 1400px;
+    text-align:right;
+    font-size: 100%;
+    text-decoration: none;
+    color: #fff;
+}
+#loginBtn:hover{
+    font-size: 120%;
+    color: #fff; 
+    /* background-color: #fff; */
+    text-shadow: 0px 0px 5px #1e90ff; 
+}
+
+
+#main_contents{
+    width: 95%;
+    height: 100%;
+    padding: 2.5%;
+    margin: 30px auto 50px auto;
+    box-shadow: 0px 0px 20px gray;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+#early_window{
+    display: none;
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+#early_wrap{
+    width: 50vh;
+    height: 60%;
+    padding: 1%;
+    margin: auto;
+    margin-top: 150px;
+    background-color: #fff;
+}
+
+#early{
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+fieldset legend{
+    margin-left: 3%;
+    font-size: 2em;
+    font-weight: bold;
+    color: #1e90ff;
+}
+
+#early div{
+    box-sizing: border-box;
+    margin: 10px;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+}
+
+#early div label{
+    margin: auto;
+}
+
+
+#early_temper_label{
+    width: 70%;
+    padding: 10%;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px #ccc;
+    background-color: #aaa;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+#early_temper_label:hover{
+    scale: 1.05;
+}
+
+
+#early div input[type=number]{
+    margin: auto 0;
+    padding: 10px;
+    width: 50%;
+    height: 30px;
+}
+
+#early #early_setBtn{
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+}
+
+#early #early_setBtn button{
+    margin: auto;
+    width: 60%;
+    padding: 5%;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0px 0px 10px #ccc;
+    transition: 0.3s;
+    border: none;
+    background-color: #1e90ff;
+    cursor: pointer;
+}
+
+
+
+#result{
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 1fr;
+}
+
+#result div{
+
+}
+
+#result #chart_wrap{
+    resize: none;
+    box-sizing: border-box;
+    padding: 2%;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#result #chart_wrap .chart_wrap{
+    margin: auto;
+    width: 100%;
+    height:100%;
+    resize: none;
+    box-sizing: border-box;
+    width: 90%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 90%;
+}
+
+#result #chart_wrap .chart_wrap p{
+    margin: auto;
+}
+
+#result #chart_wrap .chart_wrap .chart{
+    
+    resize: none;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+
+}
+
+#result-set{
+    border-left: 2px solid #aaa;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40% 30% 30%;
+}
+
+
+#result-set .chart_wrap{
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 90%;
+}
+
+#result-set .chart_wrap p{
+    margin: 0;
+    text-align: center;
+}
+
+#result-set .chart_wrap .chart{
+    border: 1px solid #aaa;
+}
+
+#early-show-btn{
+    text-align: center;
+    padding: 10%;
+    width: 100%;
+    margin: auto;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px #aaa;
+    background-color: #1e90ff;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#early-show-btn:hover{
+    background-color: #1e90ff;
+    scale: 1.05;
+}
+
+#next-setting-wrap{
+    border: 1px solid #aaa;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#next-setting{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+#next-setting-wrap #next-label{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+#next-setting-wrap #next-label #day{
+    color: #55f;
+}
+
+#next-setting #nextOF{
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    padding: 10%;
+    font-size: 1.3em;
+}
+
+#next-setting button{
+    margin: auto;
+    width: 90%;
+    
+    padding: 10%;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px #aaa;
+    background-color: #aaa;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#next-setting button:hover{
+    background-color: #1e90ff;
+    scale: 1.05;
+}

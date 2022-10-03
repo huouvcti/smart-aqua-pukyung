@@ -1,0 +1,446 @@
+
+
+
+<div id="sensor">
+
+
+    <!-- 차트 view -->
+    <div id="chart_section">
+
+        <div class="chart_wrapper">
+            <div>
+                <p id="disconn_RTD" class="disconn">disconnected</p>
+                <div class="container-fluid" id="container_RTD"></div>
+            </div>
+            <div class="sensor_last">
+                <h3>수온</h3>
+                <p id="RTD_last" style="margin-top: 50px;">none</p>
+            </div>
+        </div>
+
+
+        <div class="chart_wrapper">
+            <div>
+                <p id="disconn_PH" class="disconn">disconnected</p>
+                <div class="container-fluid" id="container_PH"></div>
+            </div>
+            <div class="sensor_last">
+                <h3>PH</h3>
+                <p id="PH_last" style="margin-top: 50px;" >none</p>
+            </div>
+        </div>
+        
+        <div class="chart_wrapper">
+            <div>
+                <p id="disconn_DO" class="disconn">disconnected</p>
+                <div class="container-fluid" id="container_DO"></div>
+            </div>
+            <div class="sensor_last">
+                <h3>DO</h3>
+                <p id="DO_last" style="margin-top: 50px;">none</p>
+            </div>
+        </div>
+        
+    
+        <div class="chart_wrapper">
+            <div>
+                <p id="disconn_SALT" class="disconn">disconnected</p>
+                <div class="container-fluid" id="container_SALT"></div>
+            </div>
+            <div class="sensor_last">
+                <h3>염분</h3>
+                <p id="SALT_last" style="margin-top: 50px;">none</p>
+            </div>
+        </div>
+        
+
+    </div>
+
+    <!-- 제어 버튼 view -->
+
+    
+
+    <div class="ctrl_section">
+
+        <div class="button_text">제어 버튼</div>
+
+        <div class="ctrl_wrapper">
+            <p class="ctrl_title">순환펌프</p>
+            <div class="ctrl">
+                <input type="checkbox" class='ctrl_checkbox' id="btn1">
+                <label class="ctrl_view" for="btn1" onClick="ctrl_btn(0)"></label>
+            </div>
+        </div>
+
+        <div class="ctrl_wrapper">
+            <p class="ctrl_title">히터</p>
+            <div class="ctrl">
+                <input type="checkbox" class='ctrl_checkbox' id="btn2">
+                <label class="ctrl_view" for="btn2" onClick="ctrl_btn(1)"></label>
+            </div>
+        </div>
+
+        <div class="ctrl_wrapper">
+            <p class="ctrl_title">산소발생기</p>
+            <div class="ctrl">
+                <input type="checkbox" class='ctrl_checkbox' id="btn3">
+                <label class="ctrl_view" for="btn3" onClick="ctrl_btn(2)"></label>
+            </div>
+        </div>
+
+        <div class="ctrl_wrapper">
+            <p class="ctrl_title">LED 조명</p>
+            <div class="ctrl">
+                <input type="checkbox" class='ctrl_checkbox' id="btn4">
+                <label class="ctrl_view" for="btn4" onClick="ctrl_btn(3)"></label>
+            </div>
+        </div>
+        <div class="ctrl_wrapper">
+            <p class="ctrl_title">sensor</p>
+            <div class="ctrl">
+                <input type="checkbox" class='ctrl_checkbox' id="btn5">
+                <label class="ctrl_view" for="btn5" onClick="ctrl_btn(4)"></label>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+
+
+
+  
+
+
+
+<!-- socket -->
+<script src="/socket.io/socket.io.js"></script>
+
+
+
+<!-- 차트 -->
+
+<script>
+console.log("<%=parameters.url%>");
+let url = "<%= parameters.url %>";
+
+const user_key = "<%= parameters.user_key %>";
+
+const socket = io.connect({
+    transports: ['websocket']
+});
+
+</script>
+
+<!-- 제어 버튼 -->
+<script>
+    let ctrl_name = ["pump", "heater", "o2", "led"];
+    let checkbox = document.getElementsByClassName("ctrl_checkbox")
+
+    function ctrl_btn(type){
+        console.log(checkbox[type].checked);
+        
+        if(checkbox[type].checked == false){
+            // on
+            socket.emit('on', ctrl_name[type]);
+        } else{
+            // off
+            socket.emit('off', ctrl_name[type]);
+        }
+    }
+    </script>
+    
+    <script>
+        socket.on('ctrl_on', (data) => {
+            checkbox[ctrl_name.indexOf(data)].checked = true;
+            console.log(checkbox[ctrl_name.indexOf(data)].checked);
+        })
+        socket.on('ctrl_off', (data) => {
+            checkbox[ctrl_name.indexOf(data)].checked = false;
+        })
+    </script>
+
+<script>
+
+
+socket.emit('join', {room: user_key});
+
+
+let chart_PH;
+let chart_RTD;
+let chart_SALT;
+let chart_DO;
+
+let PH_data = [];
+let RTD_data = [];
+let SALT_data = [];
+let DO_data = [];
+
+
+let PH_date = []
+let RTD_date = []
+let SALT_date = []
+let DO_date = []
+
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+
+
+socket.on('sensor_before_PH', async (data) => {
+    for(let i=0; i<data.length; i++){
+        let temp = Math.round(await data[i]['PH'] * 100) / 100;
+        let date = await data[i]['date'];
+        await PH_data.unshift(temp);
+        await PH_date.unshift(date);
+    }
+
+    chart_PH = await new Highcharts.Chart({
+        chart: {
+            renderTo: 'container_PH',
+            defaultSeriesType: 'spline',
+        },
+        title: {
+            text: '    '
+        },
+        xAxis:{
+            categories: PH_date,
+            visible: false
+        },
+        yAxis: {
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            title: {
+                text: '.',
+            }
+        },
+        tooltip:{
+            formatter: this.x,
+            valueSuffix: '',
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            animation: true,
+            name: 'PH',
+            data: PH_data,
+            color : '#F00'
+        }]
+    });
+});
+
+
+socket.on('sensor_before_RTD', async (data) => {
+    for(i=0; i<data.length; i++){
+        let temp = Math.round(await data[i]['RTD'] * 10) / 10;
+        let date = await data[i]['date'];
+        await RTD_data.unshift(temp);
+        await RTD_date.unshift(date);
+    }
+
+    chart_RTD = await new Highcharts.Chart({
+        chart: {
+            renderTo: 'container_RTD',
+            defaultSeriesType: 'spline',
+        },
+        title: {
+            text: '    '
+        },
+        xAxis:{
+            categories: RTD_date,
+            visible: false
+        },
+        yAxis: {
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            title: {
+                text: '°C',
+            }
+        },
+        tooltip:{
+            formatter: this.x,
+            valueSuffix: '°C',
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            animation: true,
+            name: '수온',
+            data: RTD_data,
+            color : '#06780e',
+            
+        }],
+    });
+});
+
+socket.on('sensor_before_SALT', async (data) => {
+    for(i=0; i<data.length; i++){
+        let temp = Math.round(await data[i]['SALT'] * 10) / 10;
+        let date = await data[i]['date'];
+        await SALT_data.unshift(temp);
+        await SALT_date.unshift(date);
+    }
+
+    chart_SALT = await new Highcharts.Chart({
+        chart: {
+            renderTo: 'container_SALT',
+            defaultSeriesType: 'spline',
+        },
+        title: {
+            text: '    '
+        },
+        xAxis:{
+            categories: SALT_date,
+            visible: false
+        },
+        yAxis: {
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            title: {
+                text: 'psu',
+            }
+        },
+        tooltip:{
+            formatter: this.x,
+            valueSuffix: 'psu',
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            animation: true,
+            name: '염분',
+            data: SALT_data,
+            color: '#209be3'
+        }]
+    });
+});
+
+socket.on('sensor_before_DO', async (data) => {
+    for(i=0; i<data.length; i++){
+        let temp = Math.round(await data[i]['DO'] * 100) / 100;
+        let date = await data[i]['date'];
+        await DO_data.unshift(temp);
+        await DO_date.unshift(date);
+    }
+
+    chart_DO = await new Highcharts.Chart({
+        chart: {
+            renderTo: 'container_DO',
+            defaultSeriesType: 'spline',
+        },
+        title: {
+            text: '    '
+        },
+        xAxis:{
+            categories: DO_date,
+            visible: false
+        },
+        yAxis: {
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            max: 40,
+            min: 0,
+            title: {
+                text: 'ppm',
+            }
+        },
+        tooltip:{
+            formatter: this.x,
+            valueSuffix: 'ppm',
+        },
+        credits: {
+            enabled: false
+        },
+        zoomType: "x",
+        series: [{
+            animation: true,
+            name: 'DO',
+            data: DO_data,
+            color : '#461a91',
+            shift: (data.length > 10)
+        }]
+    });
+})
+</script>
+
+
+
+
+
+<script>
+socket.on('sensor_update', async (data) => {
+
+    document.getElementById("PH_last").innerText = data["PH"];
+    document.getElementById("RTD_last").innerText = data["RTD"];
+    document.getElementById("SALT_last").innerText = data["SALT"];
+    document.getElementById("DO_last").innerText = data["DO"];
+
+    const date = new Date();
+
+    let shift_PH = (chart_PH.series[0].data.length >= 15);
+    let shift_RTD = (chart_RTD.series[0].data.length >= 15);
+    let shift_SALT = (chart_SALT.series[0].data.length >= 15);
+    let shift_DO = (chart_DO.series[0].data.length >= 15);
+
+
+    if(data["PH"] === null){
+        document.getElementById("disconn_PH").style.opacity = "100%";
+    } else {
+        document.getElementById("disconn_PH").style.opacity = "0%";
+        chart_PH.series[0].addPoint({
+            y: Math.round(data['PH'] * 100) / 100,
+        }, true, shift=shift_PH);
+
+        PH_date.push(String(data["date"]))
+        chart_PH.xAxis[0].setCategories(PH_date, false);
+        chart_PH.redraw()
+    }
+
+    if(data["RTD"] === null){
+        document.getElementById("disconn_RTD").style.opacity = "100%";
+    } else {
+        document.getElementById("disconn_RTD").style.opacity = "0%";
+        chart_RTD.series[0].addPoint({
+            y: Math.round(data['RTD'] * 10) / 10,
+        }, true, shift=shift_RTD);
+
+        RTD_date.push(String(data["date"]))
+        chart_RTD.xAxis[0].setCategories(RTD_date, false);
+        chart_RTD.redraw()
+    }
+
+    if(data["SALT"] === null){
+        document.getElementById("disconn_SALT").style.opacity = "100%";
+    } else {
+        document.getElementById("disconn_SALT").style.opacity = "0%";
+        chart_SALT.series[0].addPoint({
+            y: Math.round(data['SALT'] * 10) / 10,
+        }, true, shift=shift_SALT);
+
+        SALT_date.push(String(data["date"]))
+        chart_SALT.xAxis[0].setCategories(SALT_date, false);
+        chart_SALT.redraw()
+    }
+
+    if(data["DO"] === null){
+        document.getElementById("disconn_DO").style.opacity = "100%";
+    } else {
+        document.getElementById("disconn_DO").style.opacity = "0%";
+        chart_DO.series[0].addPoint({
+            y: Math.round(data['DO'] * 100) / 100,
+        }, true, shift=shift_DO);
+
+        DO_date.push(String(data["date"]))
+        chart_DO.xAxis[0].setCategories(DO_date, false);
+        chart_DO.redraw()
+    }
+    
+})
+</script>
+
+

@@ -1,0 +1,356 @@
+html {
+	overflow: auto;
+	touch-action: none;
+}
+
+body {
+	margin:0;
+	touch-action: none;
+}
+
+h2{
+	position:relative;
+}
+
+.navbar{
+	position:fixed;
+	width: 100%;
+	top: 0;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgba( 0, 0, 0,  0.5 );
+	color: #000;
+
+	z-index: 100;
+ }
+ 
+ .navbar_menu_btn{
+	display: inline-block; 
+	color: #fff;
+	font-size: 200%;
+	margin: 1% 0% 1%;
+ }
+ 
+ .navbar_menu_btn ul{
+	font-size: 50%;
+	display: none;
+ }
+ 
+ .navbar_menu_btn:hover ul{
+	display: block;
+ }
+ 
+ .navbar_title{
+	display: inline-block; 
+	/* display: flex; */
+	position: relative;
+	z-index: 50;
+	list-style: none;
+	padding-left: 0%;
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+	margin-top: 3%;
+ }
+ 
+ .navbar_logout {
+	display: inline-block; 
+	/* display: flex; */
+	position: relative;
+	width:100%;
+	margin: 3% 0;
+	text-align: right;
+	right: 150px;
+	list-style: none;
+	color: #fff;
+	font-size: large;
+ }
+ 
+ .navbar_logout li {
+	display: inline-block;
+ }
+ 
+ .navbar_logoutBtn{
+	position: relative;
+	z-index: 100;
+	cursor: pointer;
+	display: inline-block; 
+	background-color: #105d94;
+	border: none;
+	box-shadow: none;
+	color: #fff;
+	padding: 10%;
+	width: 150%;
+	margin-left: 40%
+ }
+
+#menu{
+	display: inline-block; 
+	/* display: flex; */
+	position: absolute;
+	list-style: none;
+	padding-left: 0%;
+	z-index: 0;
+	color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+	width: 100%;
+	margin-top: 2.5%;
+	text-align: center;
+
+}
+
+#top{
+	position: fixed;
+	right: 2%;
+	bottom: 5%;
+	cursor: pointer;
+	z-index: 100;
+	background-color: #fff;
+	border-radius: 5em;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+
+
+a:link{
+	color:black;
+	text-decoration: none;
+}
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+#icon{
+	display: inline-block;
+	margin-top: 25px;
+}
+
+
+
+.container{
+	height: 100%;
+	width: 100%;
+  	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+  
+.text{
+	font-weight: 100;
+	font-size: 70px;
+	color: #FAFAFA;
+}
+  
+.dud{
+	color: #757575;
+}
+
+
+@media all and (max-width:767px) {
+	html {
+		touch-action: none;
+		overflow: hidden;
+		
+	}
+	
+	body { margin:0; touch-action: none;}
+	
+	h2{
+		position:relative;
+	}
+	
+	.navbar{
+		position:fixed;
+		width: 100%;
+		height: 100px;
+		top: 0;
+		justify-content: space-between;
+		align-items: center;
+		background-color: rgba( 0, 0, 0,  0.5 );
+		color: #000;
+	
+		z-index: 100;
+	 }
+	 
+	 
+	 .navbar_title{
+		display: inline-block; 
+		/* display: flex; */
+		position: relative;
+		z-index: 50;
+		list-style: none;
+		padding-left: 0%;
+		color: #fff;
+		font-size: 40px;
+		font-weight: bold;
+		width: 100%;
+		text-align: center;
+		margin-top: 50px;
+	 }
+	 
+	 .navbar_logout {
+		display: inline-block; 
+		/* display: flex; */
+		position: absolute;
+		width:100%;
+		margin: 70px 0 0 0;
+		text-align: right;
+		right: 50px;
+		list-style: none;
+		color: #fff;
+		font-size: large;
+	 }
+	 
+	 .navbar_logout li {
+		display: inline-block;
+		font-size: 50%;
+	 }
+	 
+	 .navbar_logoutBtn{
+		display: inline-block; 
+		background-color: #105d94;
+		border: none;
+		box-shadow: none;
+		color: #fff;
+		padding: 10%;
+		width: 150%;
+	 }
+	
+	#menu{
+		display: inline-block; 
+		/* display: flex; */
+		position: absolute;
+		list-style: none;
+		padding-left: 0%;
+		z-index: 50;
+		color: #fff;
+		font-size: 30px;
+		font-weight: bold;
+		width: 100%;
+		margin-top: 30px;
+		text-align: center;
+	}
+	
+	#top{
+		position: fixed;
+		right: 2%;
+		bottom: 5%;
+		cursor: pointer;
+		z-index: 100;
+		background-color: #fff;
+		border-radius: 5em;
+		width: 50px;
+		height: 50px;
+		text-align: center;
+		font-weight: bold;
+	}
+	
+	
+	a:link{
+		color:black;
+		text-decoration: none;
+	}
+	a:visited {
+		color: black;
+		text-decoration: none;
+	}
+	a:hover {
+		color: black;
+		text-decoration: none;
+	}
+	
+	#icon{
+		display: inline-block;
+		margin-top: 25px;
+	}
+	
+	
+	
+	.container{
+		height: 100%;
+		width: 100%;
+		  justify-content: center;
+		align-items: center;
+		display: flex;
+	}
+	  
+	.text{
+		font-weight: 100;
+		font-size: 70px;
+		color: #FAFAFA;
+	}
+	  
+	.dud{
+		color: #757575;
+	}
+}
+
+
+/* 휴대폰 버전 */
+/* @media (max-width: 414px) {
+	.navbar{
+		position:fixed;
+		width: 100%;
+		top: 0;
+		justify-content: space-between;
+		align-items: center;
+		background-color: rgba( 0, 0, 0,  0.5 );
+		color: #000;
+		padding: 1% 6%;
+		z-index: 100;
+	}
+	 
+	.navbar_menu_btn{
+		font-size: 100%;
+		margin: 1% 0% 1%;
+	}
+	 
+	.navbar_menu_btn ul{
+		font-size: 50%;
+		display: none;
+	}
+	 
+	.navbar_menu_btn:hover ul{
+		display: block;
+	}
+	 
+	.navbar_logout {
+		display: none;
+		list-style: none;
+		color: #fff;
+		align-items: center;
+		font-size: large;
+		margin-left: 24%;
+	}
+	
+	.navbar_logout li {
+		display: inline-block;
+		font-size: 0%s;
+	}
+ 
+	.navbar_logoutBtn{
+		display: inline-block; 
+		padding: 10%;
+		width: 0%;
+		margin-left: 40%;
+		font-size: 50%;
+		
+	}
+
+	#menu{
+		font-size: 120%;
+		width: 30%;
+		margin-left: 29%;
+		padding: 3% 0%;
+	}
+} */

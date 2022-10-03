@@ -1,0 +1,135 @@
+
+<div class="log_wrapper">
+
+     <!-- 검색을 위한 부분 -->
+     <div class="search_part">
+        <input type="date" class="start_date">
+        <input type="time" class="start_time">
+        - 
+        <input type="date" class="end_date">
+        <input type="time" class="end_time">
+
+        <button class="search_btn" onclick="RTD_pageMove(0)">검색</button>
+    </div>
+  
+    <!-- 하얀선 -->
+    <hr style="width: 70%; margin-right:30%; margin-top: 2%; margin-bottom: 2%; color: #fff; border: none; border-top: 3px solid #fff; border-radius: 20%;">
+    
+    <!-- 표 그리기 -->
+    <table border="1" class="table_style"></table>
+
+    <!-- 이전, 다음, 다운로드, 삭제 -->
+    <center class="under_btns">
+        <div class="other">
+            <button class="download_btn" onclick="RTD_log_down()"><i class="fa fa-download"></i> &nbsp;&nbsp;&nbsp;&nbsp;다운로드</button>
+            <button class="delete_btn" onclick="RTD_log_del()"><i class="fa-regular fa-trash-can"></i> &nbsp;&nbsp;&nbsp;&nbsp;삭제</button>
+        </div>
+
+        <button class="prev_btn" onclick="RTD_pageMove('prev')">이전</button>
+        <button class="next_btn" onclick="RTD_pageMove('next')">다음</button>
+    </center>
+</div>
+
+<script>
+    const RTD_search = function(){
+        let start_input = document.getElementsByClassName("start_date")[1].value + " "+ document.getElementsByClassName("start_time")[1].value;
+        let end_input = document.getElementsByClassName("end_date")[1].value + " "+ document.getElementsByClassName("end_time")[1].value;
+
+        let start = new Date(start_input);            
+        let end = new Date(end_input);
+
+        if(start > end){
+            alert("잘못된 날짜 입력");
+            return "";
+        } else if(!isNaN(start.getDate()) && !isNaN(end.getDate())){
+            document.getElementsByClassName("search_start")[1].innerText = start_input;
+            document.getElementsByClassName("search_end")[1].innerText = end_input;
+            return `&start=${start_input}&end=${end_input}`;
+        } else {
+            
+            return "";
+        }
+    }
+</script>
+
+<script>
+    let page_RTD = 0;
+    let cnt_RTD = 10;
+
+    let RTD_table = document.getElementsByTagName("table")[1]
+    
+    const RTD_pageMove = function(move){
+        let search = RTD_search();
+        let RTD_inner = `<tr>
+                        <th>no</th>
+                        <th>RTD</th>
+                    
+                        <th>date</th>
+                    </tr>`;
+        if(move === 'prev'){
+            page_RTD--;
+        } else if(move === 'next') {
+            page_RTD++;
+        } else {
+            page_RTD = 0;
+        }
+        
+        if(page_RTD < 0){
+            page_RTD=0;
+            alert("첫번째 페이지 입니다.")
+        }
+        if(page_RTD > cnt_RTD){
+            page_RTD = cnt_RTD;
+            alert("마지막 페이지 입니다.")
+        }
+
+        $.ajax({
+            type:'get',
+            dataType:'json',
+            url:`/monitoring/log/RTD?page=${page_RTD}${search}`,
+            success : function(responseData) {
+                const log_RTD = responseData.result;
+                cnt_RTD = responseData.cnt;
+                for(let i=0; i<log_RTD.length; i++){
+                    RTD_inner += `
+                    <tr>
+                        <td> 
+                            ${log_RTD[i]['RTD_key']}
+                        </td>
+                        <td> 
+                            ${log_RTD[i]['RTD']}
+                        </td>
+                        <td> 
+                            ${log_RTD[i]['date']}
+                        </td>
+                    </tr>`;
+                }
+                RTD_table.innerHTML = RTD_inner;
+            },
+            error : function(error) {
+            }
+        });
+    }
+</script>
+
+
+<script>
+    const RTD_log_down = function(){
+        let search = RTD_search();
+        location.href = `/monitoring/log/down/RTD?${search}`;
+    }
+
+    const RTD_log_del = function(){
+        let search = RTD_search();
+
+        if(confirm("정말로 삭제하시겠습니까?")){
+            let check = prompt("'삭제합니다'를 입력해주세요.");
+            if(check === "삭제합니다"){
+                alert("데이터가 삭제됩니다.");
+                location.href = `/monitoring/log/del/RTD?${search}`;
+            } else {
+                alert("잘못된 입력");
+            }
+        }
+    }
+</script>

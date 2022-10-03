@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../views/monitoring/css/intro.css" type="text/css">
+    <title>intro page</title>
+
+</head>
+<body>
+    <!-- <section id="login_form">
+        <h1>Login</h1>
+        <form class="login_form" action="login/process" method="POST" >
+            <input class="input_textField" type="text" name="id" placeholder="아이디" required/><br><br>
+            <input class="input_textField" type="password" name="pw" placeholder="비밀번호" required/><br><br>
+            <input class="login_btn" type = "submit" value="로그인">
+        </form>
+    </section> -->
+
+    
+    <div class="intro_wrapper">
+        <div class="welcome">Welcome</div>
+
+        <div class="intro_comm">스마트 양식장 버튼 제어 사이트</div>
+    
+        <p class="intro_commS" > 
+            그래프로 한눈에 센서를 모니터링하고<br>
+            기록을 확인할 수 있습니다<br>
+            블라블라블라
+        </p>
+
+        <!-- login button -->
+        <button id="loginBtn" class="login_btn">login</button>
+    </div>
+   
+
+    
+
+    <!-- Modal -->
+    <div  id="loginModal" class="modal">
+        <!-- modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form class="formBox" action="login" method="POST" >
+                <h1>Login</h1>
+                <input class="input_textField" type="text" id="id" name="id" placeholder="아이디" required/><br><br>
+                <input class="input_textField" type="password" id="pw" name="pw" placeholder="비밀번호" required/><br><br>
+                <input class="form_login_btn" type = "submit" value="로그인">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("loginModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("loginBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+
+
+/* 백그라운드 배경 이미지 */
+#main_introBG {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: block;
+    background-size: cover;
+    background: url('/public/main_introBack.png') no-repeat center center fixed;
+}
+
+.intro_wrapper{
+    width: 400px;
+    height: 400px;
+    margin-top: 11%;
+    float: right;
+    margin-right: 7%;
+}
+
+
+/* welcome 문구 */
+.welcome{
+    font-size: 35px;
+    font-weight: bold;
+    color: #fff;
+    float: right;
+    text-shadow: 5px 5px 5px black;
+}
+
+/* 간단한 앱 소개 */
+.intro_comm {
+    color: #fff;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: right;
+    text-shadow: 5px 5px 5px black;
+}
+
+/* 좀 더 자세한 앱 소개 */
+.intro_commS {
+    color: #fff;
+    text-shadow: 5px 5px 5px black;
+    text-align: right;
+    font-size: 15px;
+    float: right;
+}
+
+/* 모니터링 페이지로 가는 버튼 */
+.monitoring_btn{
+    border: none;
+	box-shadow: 2px 2px 2px black;
+    margin-top: 40px;
+    padding: 5px 10px;
+    font-size: 17px;;
+    border-radius: 2em;
+    color: #fff;
+    background-color: #105d94;
+    /* float: right; */
+    margin-left: 25%;
+}
+
+/* log 페이지로 가는 버튼 */
+.log_btn{
+    border: none;
+	box-shadow: 2px 2px 2px black;
+    margin-top: 40px;
+    padding: 5px 10px;
+    font-size: 17px;;
+    border-radius: 2em;
+    color: #fff;
+    background-color: #105d94;
+    float: right;
+}
+
+
+
+@media all and (max-width:767px) {
+    /* 백그라운드 배경 이미지 */
+#main_introBG {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: block;
+    background-size: cover;
+    background: url('/public/main_introBack.png') no-repeat center center fixed;
+}
+
+.intro_wrapper{
+    width: 400px;
+    height: 400px;
+    margin-top: 200px;
+    float: right;
+}
+
+
+/* welcome 문구 */
+.welcome{
+    font-size: 35px;
+    font-weight: bold;
+    color: #fff;
+    float: right;
+    text-shadow: 5px 5px 5px black;
+}
+
+/* 간단한 앱 소개 */
+.intro_comm {
+    color: #fff;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: right;
+    text-shadow: 5px 5px 5px black;
+    white-space: nowrap;
+}
+
+/* 좀 더 자세한 앱 소개 */
+.intro_commS {
+    color: #fff;
+    text-shadow: 5px 5px 5px black;
+    text-align: right;
+    font-size: 15px;
+    float: right;
+}
+
+/* 모니터링 페이지로 가는 버튼 */
+.monitoring_btn{
+    border: none;
+	box-shadow: 2px 2px 2px black;
+    margin-top: 40px;
+    padding: 5px 10px;
+    font-size: 17px;;
+    border-radius: 2em;
+    color: #fff;
+    background-color: #105d94;
+    /* float: right; */
+    margin-left: 25%;
+}
+
+/* log 페이지로 가는 버튼 */
+.log_btn{
+    border: none;
+	box-shadow: 2px 2px 2px black;
+    margin-top: 40px;
+    padding: 5px 10px;
+    font-size: 17px;;
+    border-radius: 2em;
+    color: #fff;
+    background-color: #105d94;
+    float: right;
+}
+}
+
+
+/* 휴대폰 버전 */
+/* @media (max-width: 414px) {
+
+    .welcome{
+        font-size: 145%;
+        text-align: center;
+        margin-left: 1px;
+        margin-top: 95%;
+    }
+
+    .intro_comm {
+        font-size: 110%;
+        margin-top: 10%;
+        margin-left: 21%;
+    }
+    
+
+    .intro_commS {
+        text-align: right;
+        font-size: 90%;
+    }
+
+
+    .monitoring_btn{
+
+        padding: 5px 10px;
+        font-size: 100%;
+        margin-left: 15%;
+    }
+
+
+    .log_btn{
+        border: none;
+        box-shadow: 2px 2px 2px black;
+        margin-top: 40px;
+        padding: 5px 10px;
+        font-size: 17px;;
+        margin-left: 20px;
+        border-radius: 2em;
+        color: #fff;
+        background-color: #105d94;
+    }
+} */
