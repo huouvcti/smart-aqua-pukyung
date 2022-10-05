@@ -12,19 +12,43 @@ const fs = require('fs');
 
 
 const main = async (req, res) => {
-    if(req.session.user_key){
-        const parameters = {
-            user_key: req.session.user_key,
-            url: env_var.HOST
-        }
+    // if(req.session.user_key){
+    //     const parameters = {
+    //         user_key: req.session.user_key,
+    //         url: env_var.HOST
+    //     }
 
+    //     if(env_var.HOST === "localhost"){
+    //         parameters.url += ":" + env_var.S_PORT;
+    //     }
+    //     res.render('../views/monitoring/main.ejs', {parameters});
+    // } else{
+    //     res.send("<script>location.href='/monitoring/login';</script>");
+    // }
+
+
+    const parameters = {
+        user_key: (req.query.user != undefined) ? req.query.user : null,
+        url: env_var.HOST
+    }
+    if(req.session.admin_key){
+        req.session.user_key = parameters.user_key
+        res.render(`../views/monitoring/main.ejs`, {parameters});
+    }else if(req.session.user_key){
+        parameters.user_key = req.session.user_key
         if(env_var.HOST === "localhost"){
             parameters.url += ":" + env_var.S_PORT;
         }
-        res.render('../views/monitoring/main.ejs', {parameters});
+        if(parameters.user_key == req.session.user_key){
+            res.render(`../views/monitoring/main.ejs`, {parameters});
+        }else{
+            res.send(`<script>alert('잘못된 접근'); location.href='/monitoring?user=${req.session.user_key};</script>`);
+        }
     } else{
         res.send("<script>location.href='/monitoring/login';</script>");
     }
+
+    
     
 }
 
@@ -49,7 +73,7 @@ const sensorSend = async (req, res) => {
 */
 const login = async (req, res) => {
     if(req.session.user_key){
-        res.send("<script>location.href='/monitoring';</script>");
+        res.send(`<script>location.href='/monitoring?user=${req.session.user_key}';</script>`);
     } else{
         res.render('../views/monitoring/login.ejs');
     }
@@ -64,7 +88,7 @@ const loginProcess = async (req, res) => {
     if(db_data.length != 0){
         req.session.user_key = db_data[0].user_key;
         req.session.save(function(){
-            res.send("<script>alert('로그인 성공'); location.href='/monitoring';</script>");
+            res.send(`<script>alert('로그인 성공'); location.href='/monitoring?user=${req.session.user_key}';</script>`);
         })
     } else{
         delete req.session.user_key;

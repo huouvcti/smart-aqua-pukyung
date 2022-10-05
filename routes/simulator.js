@@ -5,7 +5,7 @@ const simulatorCtrl = require("../controller/simulatorCtrl");
 
 const halibutCtrl = require("../controller/halibutCtrl");
 
-const adminCtrl = require("../controller/adminCtrl");
+const adminCtrl = require("../controller/simulator_adminCtrl");
 
 
 

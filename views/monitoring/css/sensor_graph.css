@@ -36,8 +36,8 @@
 
 
 #sensor{
-    position: absolute;
-    top: 25%;
+    position: relative;
+    top: 5%;
     width: 100%;
     height: 65%;
     display: grid;

@@ -27,11 +27,11 @@
         <p class="intro_commS" > 
             그래프로 한눈에 센서를 모니터링하고<br>
             기록을 확인할 수 있습니다<br>
-            블라블라블라
         </p>
 
         <!-- login button -->
         <button id="loginBtn" class="login_btn">login</button>
+        <button id="adminBtn" class="admin_btn">관리자 로그인</button>
     </div>
    
 
@@ -42,7 +42,7 @@
         <!-- modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form class="formBox" action="login" method="POST" >
+            <form class="formBox" action="/monitoring/login" method="POST" >
                 <h1>Login</h1>
                 <input class="input_textField" type="text" id="id" name="id" placeholder="아이디" required/><br><br>
                 <input class="input_textField" type="password" id="pw" name="pw" placeholder="비밀번호" required/><br><br>
@@ -52,31 +52,57 @@
     </div>
 
     <script>
-        // Get the modal
         var modal = document.getElementById("loginModal");
-
-        // Get the button that opens the modal
         var btn = document.getElementById("loginBtn");
 
-        // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on the button, open the modal
         btn.onclick = function() {
-        modal.style.display = "block";
+            modal.style.display = "block";
         }
 
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
         modal.style.display = "none";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //         modal.style.display = "none";
+        //     }
+        // }
+    </script>
+
+
+
+    <!-- Modal -->
+    <div  id="adminModal" class="modal">
+        <!-- modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form class="formBox" action="/monitoring/admin/login" method="POST" >
+                <h1>관리자 로그인</h1>
+                <input class="input_textField" type="text" id="id" name="id" placeholder="아이디" required/><br><br>
+                <input class="input_textField" type="password" id="pw" name="pw" placeholder="비밀번호" required/><br><br>
+                <input class="form_login_btn" type = "submit" value="로그인">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var modal2 = document.getElementById("adminModal");
+        var btn2 = document.getElementById("adminBtn");
+
+        var span2 = document.getElementsByClassName("close")[1];
+
+        btn2.onclick = function() {
+            modal2.style.display = "block";
         }
+
+        span2.onclick = function() {
+        modal2.style.display = "none";
+        }
+
+
     </script>
 
 </body>

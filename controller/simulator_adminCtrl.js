@@ -11,7 +11,7 @@ const main = async (req, res) => {
     console.log(req.session.s_admin_key)
     if(req.session.s_admin_key){
         const parameters = {
-            user_key: req.session.sadmin_key,
+            user_key: req.session.s_admin_key,
             url: env_var.HOST
         }
 
@@ -49,7 +49,7 @@ const loginProcess = async (req, res) => {
             res.send("<script>alert('로그인 성공'); location.href='/simulator/admin';</script>");
         })
     } else{
-        delete req.session.s_user_key;
+        delete req.session.s_admin_key;
         res.send("<script>alert(`로그인 실패 \n\n로그인페이지로 이동`); location.href='/simulator/admin/login';</script>");
     }
 }

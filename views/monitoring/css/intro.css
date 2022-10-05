@@ -45,7 +45,7 @@ body{
 
 
 .login_btn{
-    width: 90px;
+    width: 23%;
     height: 30px;
     font-size:larger;
     border-radius: 2em;
@@ -57,7 +57,27 @@ body{
     margin-left: 77%;
     font-weight: bold;
     box-shadow:4px 4px 4px black;
+    cursor: pointer;
     /* float: right; */
+}
+
+.admin_btn{
+    width: 100%;
+    height: 30px;
+    font-size:larger;
+    text-align: right;
+    text-decoration: underline;
+
+    border: none;
+
+    color: #fff;
+
+    margin-top: 5%;
+
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 
