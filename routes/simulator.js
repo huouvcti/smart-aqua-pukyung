@@ -28,4 +28,9 @@ router.post('/halibut/set/OF', halibutCtrl.set.OF);
 
 router.get('/admin', adminCtrl.main);
 
+router.route("/admin/login")
+    .get(adminCtrl.login)
+    .post(adminCtrl.loginProcess);
+router.get("/admin/logout", adminCtrl.logoutProcess);
+
 module.exports = router;

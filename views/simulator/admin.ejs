@@ -5,10 +5,10 @@
   </head>
   <body>
     <header>
-        <h1 onclick="location.href='/admin'">성장 시뮬레이터 - 관리자</h1>
+        <h1 onclick="location.href='/simulator/admin'">성장 시뮬레이터 - 관리자</h1>
         <p>
             <span id="admin_name"></span>
-            <a href="/admin/login/logout" id="logout_btn">로그아웃</a>
+            <a href="/simulator/admin/logout" id="logout_btn">로그아웃</a>
         </p>
 
         <style>
@@ -27,7 +27,7 @@
             color: #fff;
             font-family: helvetica, arial;
             text-align: center;
-            font-size: 400%;
+            font-size: 200%;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -49,6 +49,12 @@
         }
         header #logout_btn{
             text-decoration: none;
+        }
+
+
+        #user_select{
+            font-size: 1.3em;
+            padding: 0 10px;
         }
 
 
@@ -97,7 +103,7 @@
 
         
     <div id="iframe_wrap">
-        <iframe id="iframe" src="http://211.184.227.81:8200/simulator/halibut/1" frameborder="0" scrolling="no"></iframe>
+        <iframe id="iframe" src="http://localhost:8200/simulator/halibut/1" frameborder="0" scrolling="no"></iframe>
     </div>
     
 

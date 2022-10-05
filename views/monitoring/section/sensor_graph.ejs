@@ -1,9 +1,9 @@
 
 
 
+
+
 <div id="sensor">
-
-
     <!-- 차트 view -->
     <div id="chart_section">
 
@@ -12,9 +12,10 @@
                 <p id="disconn_RTD" class="disconn">disconnected</p>
                 <div class="container-fluid" id="container_RTD"></div>
             </div>
-            <div class="sensor_last">
+            <div class="sensor_last" style="grid-template-rows: 1fr 2fr 1fr;">
                 <h3>수온</h3>
                 <p id="RTD_last" style="margin-top: 50px;">none</p>
+                <button id="RTD_set_Btn">set</button>
             </div>
         </div>
 
@@ -134,7 +135,7 @@ const socket = io.connect({
 
 <!-- 제어 버튼 -->
 <script>
-    let ctrl_name = ["pump", "heater", "o2", "led"];
+    let ctrl_name = ["pump", "heater", "o2", "led", "sensor"];
     let checkbox = document.getElementsByClassName("ctrl_checkbox")
 
     function ctrl_btn(type){

@@ -66,7 +66,7 @@
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
                 anchors: ['page1', 'page2', 'page3', 'page4'],
-				sectionsColor: ['#105d94', '#105d94', '#ccddff', '#000'],
+				sectionsColor: ['#105d94', '#105d94', '#003b82', '#000'],
                 slidesNavigation: true
 			});
 
@@ -119,6 +119,36 @@
 
     </nav>
 
+    <div id="RTD_set_back">
+        <div id="RTD_set_wrapper">
+            <h3>RTD set</h3>
+            <input type="text" placeholder="row">
+            <input type="text" placeholder="high">
+            <button>set</button>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", event => {
+            const RTD_set_Btn = document.getElementById("RTD_set_Btn");
+
+            const RTD_set_back = document.getElementById("RTD_set_back");
+
+            document.addEventListener("click", event => {
+                if(event.target == RTD_set_Btn){
+                    RTD_set_back.style.display = "block";
+                }
+                if (event.target == RTD_set_back) {
+                    RTD_set_back.style.display = "none";
+                    
+                }
+            })
+        })
+    </script>
+
+
+
+
 <!--<div id="top"><a href="#page2"><i class="fa-solid fa-angle-up fa-lg" id="icon"></i></a></div> -->
     <div id="top"><a href="#page1"><div class="top_text"><i class="fa-solid fa-angle-up" href="#page1"></i><br>TOP</div></a></div>
 
@@ -156,12 +186,12 @@
         </div>
 
         <!-- 센서 모니터링 main page -->
-        <div class="section" id="section1" style="background: url('/public/background2.jpg'); background-size:cover; z-index:-1; opacity: 80%; overflow:hidden;">
+        <div class="section" id="section1" style=" z-index:-1; opacity: 80%; overflow:hidden;">
             <%-include('./section/sensor_graph.ejs') %>
         </div>
         
         <!-- log page -->
-        <div class="section" id="section2"style="background: url('/public/background3.jpg'); background-size:cover; z-index:-1; opacity: 80%">
+        <div class="section" id="section2"style="z-index:-1; opacity: 80%">
             <div class="slide" id="PH" data-anchor="PH">
                 <%-include('./section/log_PH.ejs') %>
             </div>

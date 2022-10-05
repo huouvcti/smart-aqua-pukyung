@@ -10,38 +10,24 @@ const { fun } = require('./function/halibut');
 
 
 const main = async (req, res) => {
-    if(req.session.s_user_key){
-        const parameters = {
-            user_key: req.params.user_key,
-            url: env_var.HOST
-        }
+
+    const parameters = {
+        user_key: req.params.user_key,
+        url: env_var.HOST
+    }
+
+    if(req.session.s_admin_key){
+        req.session.s_user_key = parameters.user_key
+        res.render(`../views/simulator/halibut.ejs`, {parameters});
+    }else if(req.session.s_user_key){
         // if(env_var.HOST === "localhost"){
         //     parameters.url += ":" + env_var.S_PORT;
         // }
-
-        console.log(req.session.s_user_key)
-        console.log(req.params.user_key)
-
-        req.session.admin_key = 1
-
-        req.session.save(function(){
-            console.log("저장 성공")
-        })
-        
-        if(req.session.admin_key == 1){
-            req.session.s_user_key = parameters.user_key
-        }
-
-        console.log(req.session.s_user_key)
-        console.log(req.params.user_key)
-
         if(parameters.user_key == req.session.s_user_key){
             res.render(`../views/simulator/halibut.ejs`, {parameters});
         }else{
             res.send(`<script>alert('잘못된 접근'); location.href='/simulator';</script>`);
         }
-
-        
     } else{
         res.send("<script>location.href='/simulator/login';</script>");
     }
