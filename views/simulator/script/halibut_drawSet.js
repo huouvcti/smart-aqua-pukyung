@@ -2,6 +2,7 @@ let chart_Temp
 let chart_Wg
 let chart_TWg
 let chart_FV
+let chart_death
 
 // 수온 그래프 그리기 
 const draw_Temp = (result) => {
@@ -36,6 +37,8 @@ const draw_result = (result) => {
     let Wg_data = result[0]['Wg'];
     let TWg_data = result[0]['TWg'];
     let FV_data = result[0]['FV'];
+
+    let death_data = null;
     
     
 
@@ -43,9 +46,13 @@ const draw_result = (result) => {
     chart_TWg = chart_draw2(chart_TWg, '총중량', [TWg_data], '#f00', '총중량(FCR)', [TWg_data], '#000', 'kg', 'chart_TWg');
     chart_FV = chart_draw2(chart_FV, '권장사료량', [FV_data], '#f00', '임의사료량', [FV_data], '#000', 'kg', 'chart_FV');
 
+    chart_death = chart_draw(chart_death, '폐사율', [death_data], "#f00", '%', 'chart_death')
+
+
     chart_Wg.redraw()
     chart_TWg.redraw()
     chart_FV.redraw()
+    chart_death.redraw();
 
     window.addEventListener('resize', draw_result, false)
 
@@ -70,6 +77,8 @@ const drawAdd_result = (result) => {
     let FV_data = result['FV'];
     let OF_data = result['OF'];
 
+    let death_data = result['death']
+
 
     chart_Wg.series[0].addPoint({
         y: Wg_data,
@@ -92,6 +101,9 @@ const drawAdd_result = (result) => {
         y: OF_data
     })
 
+    chart_death.series[0].addPoint({
+        y: death_data
+    })
     day.innerText = Number(day_value)+1
 }
 

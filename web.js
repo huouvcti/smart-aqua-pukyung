@@ -7,7 +7,7 @@ const http = require('http');
 
 const {socketio} = require('./middleware/socketio');
 
-const port = env_var.S_PORT || 8001;
+const port = env_var.S_PORT || 8200;
 const server = http.createServer(app);
 server.listen(port, () => {
     console.log('Server on ' + port);

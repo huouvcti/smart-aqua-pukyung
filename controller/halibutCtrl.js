@@ -87,6 +87,7 @@ set.TF = async (req, res) => {
     let Wg = []     // 개체 중량 g
     let TWg = []    // 총 중량 kg
     let FV = []     // 권장 사료량 kg
+    let death = []  // 폐사율 %
 
     let TGC = []    // 
     let FR = []     // 사료 공급률 %
@@ -96,9 +97,6 @@ set.TF = async (req, res) => {
 
     // 초기 중량값은 입력값
     Wg[0] = req.body.early_W;
-
-    
-
 
     for(let i=0; i<Temp.length; i++) {
 
@@ -115,12 +113,17 @@ set.TF = async (req, res) => {
         TGC[i] = fun.F_TGC("", Wg[i])
         FR[i] = fun.F_FR(Temp[i]['Temp'], Wg[i])
         FV[i] = fun.F_FV(FR[i], Wg[i], TF)
+        death[i] = 0
+        
 
 
         parameters.Wg = Wg[i]
         parameters.TWg = TWg[i]
         parameters.FV = FV[i]
+        parameters.death = death[i]
+
         parameters.day = i+1
+        
         
 
         // console.log(parameters);
@@ -161,6 +164,9 @@ set.OF = async (req, res) => {
     let Wig         // 개체중량 (FCR 적용)
     let TWig        // 총중량
 
+    let death
+
+    const Temp = await halibutDAO.get.Temp(user_key);
 
 
     // day 기준 당일[0], 다음 날[1] 값(day, Wg, TF, FV) 가져오기
@@ -181,12 +187,15 @@ set.OF = async (req, res) => {
     TWig = Wig*TF/1000
 
     
+    death = fun.F_Death(Wig, Temp[day]['Temp'], FV, OF)
+    
 
 
     let parameters = {
         OF: OF,
         Wig: Wig,
         TWig: TWig,
+        death: death,
         day: day,
         user_key: user_key
     }
@@ -201,6 +210,7 @@ set.OF = async (req, res) => {
 
     res.send(result[0])
 }
+
 
 module.exports = {
     main,

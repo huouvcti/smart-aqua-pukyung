@@ -30,7 +30,7 @@ show.all = (user_key) =>{
             ROUND(Wig,2) AS Wig,
             ROUND(TWg,2) AS TWg,
             ROUND(TWig,2) AS TWig,
-            ROUND(die,2) AS die  
+            ROUND(death,2) AS death  
             FROM simulator_halibut
             WHERE user_key=? ORDER BY day ASC`, [user_key], (err, db_data) => {
             if(err) {
@@ -70,7 +70,8 @@ show.nextDay = (parameters) =>{
             ROUND(Wg,2) AS Wg,
             ROUND(Wig,2) AS Wig,
             ROUND(TWg,2) AS TWg,
-            ROUND(TWig,2) AS TWig
+            ROUND(TWig,2) AS TWig,
+            ROUND(death,2) AS death
             FROM simulator_halibut
             WHERE user_key=? AND day=?`, [parameters.user_key, parameters.day], (err, db_data) => {
             if(err) {
@@ -139,7 +140,7 @@ set.TF = (TF, user_key) =>{
 set.Wig = (parameters) =>{
     return new Promise((resolve, reject) =>{
         db.query(
-            `UPDATE simulator_halibut SET OF=?, Wig = ?, TWig=? WHERE (user_key=? AND day=?);`, [parameters.OF, parameters.Wig, parameters.TWig, parameters.user_key, parameters.day], (err, db_data) => {
+            `UPDATE simulator_halibut SET OF=?, Wig = ?, TWig=?, death=? WHERE (user_key=? AND day=?);`, [parameters.OF, parameters.Wig, parameters.TWig, parameters.death, parameters.user_key, parameters.day], (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
@@ -152,7 +153,7 @@ set.Wig = (parameters) =>{
 set.FV = (parameters) =>{
     return new Promise((resolve, reject) =>{
         db.query(
-            `UPDATE simulator_halibut SET Wg = ?, TWg=?, FV=? WHERE (user_key=? AND day=?);`, [parameters.Wg, parameters.TWg, parameters.FV, parameters.user_key, parameters.day], (err, db_data) => {
+            `UPDATE simulator_halibut SET Wg = ?, TWg=?, FV=?, death=? WHERE (user_key=? AND day=?);`, [parameters.Wg, parameters.TWg, parameters.FV, parameters.death, parameters.user_key, parameters.day], (err, db_data) => {
             if(err) {
                 reject(err);
             } else {

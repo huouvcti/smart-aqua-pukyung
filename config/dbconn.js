@@ -7,6 +7,7 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
 
+
 const dbOption = {
     host: env_var.DB_HOST,
     port: env_var.DB_PORT,
@@ -16,6 +17,8 @@ const dbOption = {
     
     multipleStatements: true    // 다중쿼리문 허용
 }
+
+console.log(dbOption)
 
 const db = mysql.createConnection(dbOption);
 

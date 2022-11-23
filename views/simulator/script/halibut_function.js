@@ -88,3 +88,38 @@ const F_TWg = (Wg, TF) => {
     return Wg*TF/1000
 }
 
+
+const F_Death = (W, TF) => {
+    if(W <= 20){
+        if(TF <= 22.5){
+            return -0.2335*W + 0.1217*TF - 9.27
+        } else {
+            return 40.3472 / (1 + Math.pow((W-29.8634)/4.5791, 2)) * (1 + Math.pow((TF-269.644)/82.4761, 2)) 
+        }
+    } else if(W <= 50){
+        if(TF <= 22.5){
+            return -0.6578*W - 0.1814*TF + 0.013*Math.pow(W, 2) + 0.0008*Math.pow(TF, 2) + 17.8231
+        } else {
+            return -6.4346*W - 0.2503*TF + 0.1552*Math.pow(W, 2) + 0.0011*Math.pow(TF, 2) + 78.9149
+        }
+    } else if(W <= 300){
+        if(TF <= 22.5){
+            return -0.4471*W - 0.2197*TF + 0.0093*Math.pow(W, 2) + 0.0008*Math.pow(TF, 2) + 20.914
+        } else {
+            return -6.801*W - 0.2157*TF + 0.1523*Math.pow(W, 2) + 0.0008*Math.pow(TF, 2) + 88.7348
+        }
+    } else if(W <= 750){
+        if(TF <= 22.5){
+            return -0.385*W - 0.1605*TF + 0.0079*Math.pow(W, 2) + 0.0006*Math.pow(TF, 2) + 15.4024
+        } else {
+            return -5.0021*W - 0.2259*TF + 0.1111*Math.pow(W, 2) + 0.0008*Math.pow(TF, 2) + 71.0974
+        }
+    } else {    // W >= 751
+        if(TF <= 22.5){
+            return -1.2263*W - 0.1304*TF + 0.0286*Math.pow(W, 2) + 0.0005*Math.pow(TF, 2) + 21.557
+        } else {
+            return 23.82 / (1 + Math.pow((W-30.3221)/4.5325, 2)) * (1 + Math.pow((TF-288.5188)/61.5403, 2)) 
+        }
+    }
+}
+

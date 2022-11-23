@@ -90,6 +90,42 @@ fun.F_TWg = (Wg, TF) => {
     return Wg*TF/1000
 }
 
+fun.F_Death = (W, T, FV, OF) => {
+    let overFeed = OF/FV * 100
+
+    if(W <= 20){
+        if(T <= 22.5){
+            return -0.2335*T + 0.1217*overFeed - 9.27
+        } else {
+            return 40.3472 / (1 + Math.pow((T-29.8634)/4.5791, 2)) * (1 + Math.pow((overFeed-269.644)/82.4761, 2)) 
+        }
+    } else if(W <= 50){
+        if(T <= 22.5){
+            return -0.6578*T - 0.1814*overFeed + 0.013*Math.pow(T, 2) + 0.0008*Math.pow(overFeed, 2) + 17.8231
+        } else {
+            return -6.4346*T - 0.2503*overFeed + 0.1552*Math.pow(T, 2) + 0.0011*Math.pow(overFeed, 2) + 78.9149
+        }
+    } else if(W <= 300){
+        if(T <= 22.5){
+            return -0.4471*T - 0.2197*overFeed + 0.0093*Math.pow(T, 2) + 0.0008*Math.pow(overFeed, 2) + 20.914
+        } else {
+            return -6.801*T - 0.2157*overFeed + 0.1523*Math.pow(T, 2) + 0.0008*Math.pow(overFeed, 2) + 88.7348
+        }
+    } else if(W <= 750){
+        if(T <= 22.5){
+            return -0.385*T - 0.1605*overFeed + 0.0079*Math.pow(T, 2) + 0.0006*Math.pow(overFeed, 2) + 15.4024
+        } else {
+            return -5.0021*T - 0.2259*overFeed + 0.1111*Math.pow(T, 2) + 0.0008*Math.pow(overFeed, 2) + 71.0974
+        }
+    } else {    // W >= 751
+        if(T <= 22.5){
+            return -1.2263*T - 0.1304*overFeed + 0.0286*Math.pow(T, 2) + 0.0005*Math.pow(overFeed, 2) + 21.557
+        } else {
+            return 23.82 / (1 + Math.pow((T-30.3221)/4.5325, 2)) * (1 + Math.pow((overFeed-288.5188)/61.5403, 2)) 
+        }
+    }
+}
+
 
 
 module.exports = {

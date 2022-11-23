@@ -1,7 +1,7 @@
 const env_var = {
     S_PORT: "8200",
     // HOST: "localhost",
-    HOST: "smart-aquaculture.kr",
+    HOST: "localhost",
 
     // DB_HOST: "oceanit.synology.me",    
     // DATABASE: "fishery",
@@ -9,11 +9,11 @@ const env_var = {
     // DB_USER: "uit",
     // DB_PW: "Hoseo12345^",
 
-    DB_HOST: "smart-aquaculture.kr",    
-    DATABASE: "imth",
+    DB_HOST: "localhost",    
+    DATABASE: "pukyung_monitoring",
     DB_PORT: "3306",
-    DB_USER: "imth",
-    DB_PW: "smartaqua!",
+    DB_USER: "root",
+    DB_PW: "1234",
 
     SECRET_KEY: "hoseo"
 }

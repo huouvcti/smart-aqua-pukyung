@@ -101,6 +101,8 @@
             url:`/monitoring/log/PH?page=${page_PH}${search}`,
             success : function(responseData) {
                 const log_PH = responseData.result;
+
+                console.log(responseData)
                 cnt_PH = responseData.cnt;
                 for(let i=0; i<log_PH.length; i++){
                     PH_inner += `
@@ -109,7 +111,7 @@
                             ${log_PH[i]['PH_key']}
                         </td>
                         <td> 
-                            ${log_PH[i]['PH']}
+                            ${Math.round(log_PH[i]['PH'] * 100) / 100}
                         </td>
                         <td> 
                             ${log_PH[i]['date']}
