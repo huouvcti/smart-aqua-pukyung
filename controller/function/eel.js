@@ -49,18 +49,16 @@ fun.F_FV = (W, TF) => {
     return FV
 }
 
-fun.F_FCR = (FV, TF, W1, W2) => {
+fun.F_FCR = (FV, TF, Wg_sub) => {
     let PF = TF * 0.1
-    let Wg = W2-W1
-
-    let FCR = FV / (PF*Wg/1000)
+    let FCR = FV / (PF*Wg_sub/1000)
 
     return FCR
 }
 
-fun.F_dwg = (W, W1, W2, TF, OF) => {
+fun.F_dwg = (W, Wg_sub, TF, OF) => {
     let FV = fun.F_FV(W, TF)
-    let FCR_1 = fun.F_FCR(FV, TF, W1, W2)
+    let FCR_1 = fun.F_FCR(FV, TF, Wg_sub)
     let PF = TF * 0.1
 
     let dwg
@@ -85,7 +83,7 @@ fun.F_w = (T, W, code) => {
     // }
 }
 
-fun.F_dWg = (W, dwg) => {
+fun.F_Wig = (W, dwg) => {
     return W + dwg
 }
 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/views/simulator/css/halibut.css" />
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+
+
+
+    <!-- 엑셀 파일 읽기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.5/xlsx.full.min.js"></script>
+
+
+    <!-- <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+
+
+    <!-- <script type="text/javascript" src="/views/simulator/script/halibut_function.js"></script> -->
+    <script type="text/javascript" src="/views/simulator/script/highchart.js"></script>
+    <script type="text/javascript" src="/views/simulator/script/eel_ajax.js"></script>
+    <script type="text/javascript" src="/views/simulator/script/eel_drawSet.js"></script>
+
+    <script>
+    </script>
+
+
+    <link rel="shortcut icon" href="#">
+    <title>main page</title>
+</head>
+<body>
+    <!-- <h1 id="title">넙치 성장 예측 프로그램</h1> -->
+
+    <div id="early_window">
+        <div id="early_wrap">
+            <fieldset id="early">
+            <legend>초기값 설정</legend>
+            <div>
+                <label for="early_temper" id="early_temper_label">기간별 수온<br>(파일 업로드)</label>
+                <input type="file" id="early_temper" onchange="readExcel()" style="display:none;">
+                <label>(파일명)</label>
+            </div>
+            <div>
+                <label for="early_TF">총 마리수: </label>
+                <input type="number" id="early_TF">
+            </div>
+            <div>
+                <label for="early_W">개체중량(g): </label>
+                <input type="number" id="early_W">
+            </div>
+            <div id="early_setBtn">
+                <button id="early_Btn" onClick="early_set()">설정하기</button>
+            </div>
+        </fieldset>
+        </div>
+        
+    </div>
+
+    <div id="main_contents">
+        <fieldset id="result">
+            <legend>뱀장어 시뮬레이터</legend>
+            <div id="chart_wrap">
+                <div class="chart_wrap">
+                    <p><개체 중량></p>
+                    <div class="chart" id="chart_Wg"></div>
+                </div>
+
+                <div class="chart_wrap">
+                    <p><총 중량></p>
+                    <div class="chart" id="chart_TWg"></div>
+                </div>
+
+                <div class="chart_wrap">
+                    <p><권장 사료량></p>
+                    <div class="chart" id="chart_FV"></div>
+                </div>
+
+                <div class="chart_wrap">
+                    <p><폐사율></p>
+                    <div class="chart" id="chart_death"></div>
+                </div>
+            </div>
+
+
+            <div id="result-set">
+                <div class="chart_wrap">
+                    <p><수온></p>
+                    <div class="chart" id="chart_Temp"></div>
+                </div>
+
+                <button id="early-show-btn">초기 설정 하기</button> 
+
+                <div id="next-setting-wrap">
+                    <label for="next" id="next-label"><span id="day"></span>일차 사료 공급 하기</label>
+
+                    <div id="next-setting">    
+                        <input type="number" id="nextOF">
+                        <button onclick="nextResult()">다음날</button>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </fieldset>
+    </div>
+
+
+
+    <div style="color: #fff">
+        <h2>사용법</h2>
+        <p>1. 기간별 수온 파일 업로드 (.xlsx, .csv) => 수온 그래프가 그려짐</p>
+        <p>2. 총 마리수, 초기 개체중량 입력 => 개체중량, 총중량, 권장 사료량 그래프 세팅</p>
+        <p>3. 다음날 사료공급하기 => 개체중량, 총중량, 권장 사료량 그래프 값 추가</p>
+    </div>
+
+
+    <style>
+        .chart{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+
+    <script>
+        window.addEventListener("DOMContentLoaded", event => {
+            const early_show_btn = document.getElementById("early-show-btn");
+
+            const early_window = document.getElementById("early_window");
+            const start_setting_close = document.getElementById("start_setting_close");
+
+            document.addEventListener("click", event => {
+                if(event.target == early_show_btn){
+                    early_window.style.display = "block";
+                }
+                if (event.target == early_window) {
+                    early_window.style.display = "none";
+                    
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>
