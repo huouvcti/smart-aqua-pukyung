@@ -18,6 +18,19 @@ const clear = (user_key) =>{
     })
 }
 
+const clearAll = () =>{
+    return new Promise((resolve, reject) =>{
+        db.query(
+            `DELETE FROM simulator_eel`, [user_key], (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 show.all = (user_key) =>{
     return new Promise((resolve, reject) =>{
         db.query(
@@ -167,6 +180,7 @@ set.FV = (parameters) =>{
 
 module.exports = {
     clear,
+    clearAll,
 
     show,
 

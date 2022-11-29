@@ -124,8 +124,6 @@ set.TF = async (req, res) => {
 
         parameters.day = i+1
         
-        
-
         // console.log(parameters);
         // result.push(parameters);
 
@@ -188,7 +186,29 @@ set.OF = async (req, res) => {
 
     
     death = fun.F_Death(Wig, Temp[day]['Temp'], FV, OF)
-    
+
+
+
+    // 적정 사료 공급시 개체증량 * 1.1 이 넘지 않도록 
+    if(Wig > halibut_data[1]['Wg']*1.1){
+        Wig = halibut_data[1]['Wg']*1.1
+    }
+
+    // 사료 미공급시 폐사 발생 x
+    if(OF < FV || OF == 0){
+        death = halibut_data[1]['death']
+    }
+
+    // 폐사율은 0~100 사이값
+    if(death > 100){
+        death = 100
+    } else if(death < 0){
+        death = 0
+    }
+
+    // 총 중량 폐사율 반영
+    TWig = Wig*(TF - TF*(death*0.01))/1000
+
 
 
     let parameters = {
@@ -210,6 +230,25 @@ set.OF = async (req, res) => {
 
     res.send(result[0])
 }
+
+
+set.clear = async (req, res) => {
+    const user_key = req.session.s_user_key;
+
+    // 기존 데이터 삭제
+    await halibutDAO.clear(user_key)
+
+    res.send({result: "success"})
+}
+
+set.clearAll = async (req, res) => {
+    // 전체 데이터 삭제
+    await halibutDAO.clear()
+
+    res.send({result: "success"})
+}
+
+
 
 
 module.exports = {

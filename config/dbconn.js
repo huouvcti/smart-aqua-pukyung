@@ -18,7 +18,6 @@ const dbOption = {
     multipleStatements: true    // 다중쿼리문 허용
 }
 
-console.log(dbOption)
 
 const db = mysql.createConnection(dbOption);
 

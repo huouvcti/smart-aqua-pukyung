@@ -26,6 +26,8 @@ router.post('/halibut/set/temp', halibutCtrl.set.temp);
 router.post('/halibut/set/TF', halibutCtrl.set.TF);
 router.post('/halibut/set/OF', halibutCtrl.set.OF);
 
+router.post('/halibut/set/clear', halibutCtrl.set.clear);
+router.post('/halibut/set/clearAll', halibutCtrl.set.clearAll);
 
 
 router.get('/eel/:user_key', eelCtrl.main);
@@ -35,6 +37,9 @@ router.get('/eel/show/all', eelCtrl.show.all);
 router.post('/eel/set/temp', eelCtrl.set.temp);
 router.post('/eel/set/TF', eelCtrl.set.TF);
 router.post('/eel/set/OF', eelCtrl.set.OF);
+
+router.post('/eel/set/clear', eelCtrl.set.clear);
+router.post('/eel/set/clearAll', eelCtrl.set.clearAll);
 
 
 router.get('/admin', adminCtrl.main);

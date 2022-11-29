@@ -38,6 +38,25 @@ $(document).ready(function() {
 });
 
 
+function setting_clear(){
+    if(confirm("정말로 초기화 하시겠습니까?\n모든 데이터가 삭제됩니다.")){
+        $.ajax ({
+            type:'POST',
+            dataType:'json',
+            url:`/simulator/halibut/set/clear`,
+            success : function(result){
+                console.log("삭제")
+                alert("데이터 삭제 성공")
+                location.reload()
+            },
+            error : function(err) {
+                console.log(err)
+            }
+        });
+    }
+}
+
+
 
 
 // 엑셀 업로드 후 수온 그래프 그리기

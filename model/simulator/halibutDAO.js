@@ -18,6 +18,19 @@ const clear = (user_key) =>{
     })
 }
 
+const clearAll = () =>{
+    return new Promise((resolve, reject) =>{
+        db.query(
+            `DELETE FROM simulator_halibut`, [user_key], (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 show.all = (user_key) =>{
     return new Promise((resolve, reject) =>{
         db.query(
@@ -99,7 +112,7 @@ get.Temp = (user_key) =>{
 get.requireI = (user_key, day) =>{
     return new Promise((resolve, reject) =>{
         db.query(
-            `SELECT day, Wg, TF, FV, Wig FROM simulator_halibut WHERE user_key=? AND (day=? OR day=?+1) ORDER BY day ASC`, [user_key, day, day], (err, db_data) => {
+            `SELECT day, Wg, TF, FV, Wig, death FROM simulator_halibut WHERE user_key=? AND (day=? OR day=?+1) ORDER BY day ASC`, [user_key, day, day], (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
@@ -167,6 +180,7 @@ set.FV = (parameters) =>{
 
 module.exports = {
     clear,
+    clearAll,
 
     show,
 
