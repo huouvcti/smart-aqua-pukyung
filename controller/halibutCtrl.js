@@ -59,6 +59,8 @@ set.temp = async (req, res) => {
     const property_name = ['day', 'month', 'Temp']
     let size = (temper_json.length <= 365) ? temper_json.length : 365;
     
+
+    l
     for(let i=0; i<size; i++){
         let j=0;
         for(let prop in temper_json[i]){
@@ -67,8 +69,12 @@ set.temp = async (req, res) => {
             delete temper_json[i][prop];
         }
 
-        // 한 줄씩 DB 저장
-        await halibutDAO.set.Temp(temper_json[i], user_key)
+        if(isNaN(temper_json[i].month) && isNaN(temper_json[i].day)){
+            // 한 줄씩 DB 저장
+            await halibutDAO.set.Temp(temper_json[i], user_key)
+        }
+
+        
     }
 
     let result = await halibutDAO.get.Temp(user_key)
