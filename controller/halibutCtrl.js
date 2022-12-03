@@ -54,13 +54,11 @@ set.temp = async (req, res) => {
     // 기존 데이터 삭제
     await halibutDAO.clear(user_key)
 
-
+    
     // property name 변경
     const property_name = ['day', 'month', 'Temp']
     let size = (temper_json.length <= 365) ? temper_json.length : 365;
     
-
-    l
     for(let i=0; i<size; i++){
         let j=0;
         for(let prop in temper_json[i]){
