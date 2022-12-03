@@ -67,7 +67,9 @@ set.temp = async (req, res) => {
             delete temper_json[i][prop];
         }
 
-        if(isNaN(temper_json[i].month) && isNaN(temper_json[i].day)){
+        
+
+        if(! isNaN(temper_json[i].month) && ! isNaN(temper_json[i].day)){
             // 한 줄씩 DB 저장
             await halibutDAO.set.Temp(temper_json[i], user_key)
         }
